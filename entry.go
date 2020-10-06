@@ -62,8 +62,7 @@ func (entry *Entry) GetQualifier() (int, error) {
 	}
 	// q is a *guid_t
 	defer func() {
-		// free
-
+		C.acl_free(q)
 	}()
 	uuid := (*C.uchar)(q)
 	var id C.id_t
