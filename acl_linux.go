@@ -7,6 +7,7 @@ package acl
 // #cgo linux LDFLAGS: -lacl
 import "C"
 import (
+	"errors"
 	"fmt"
 	"os"
 )
@@ -112,4 +113,9 @@ func (pset *Permset) String() string {
 	}
 
 	return fmt.Sprintf("%c%c%c", r, w, e)
+}
+
+// GetFileExtended returns the extended access ACL associated with the given file path.
+func GetFileExtended(path string) (*ACL, error) {
+	return nil, errors.New("GetFileExtended only supported on Darwin")
 }

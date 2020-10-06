@@ -149,3 +149,8 @@ func (pset *Permset) String() string {
 	}
 	return strings.Join(all, ", ")
 }
+
+// GetFileExtended returns the extended access ACL associated with the given file path.
+func GetFileExtended(path string) (*ACL, error) {
+	return getFile(path, C.ACL_TYPE_EXTENDED)
+}
