@@ -47,7 +47,13 @@ func (entry *Entry) Copy() (*Entry, error) {
 
 // SetQualifier sets the Uid or Gid the entry applies to.
 func (entry *Entry) SetQualifier(id int) error {
-	rv, err := C.acl_set_qualifier(entry.e, unsafe.Pointer(&id))
+	var uuid C.uuid_t
+	result := C.mbr_uid_to_uuid(C.uint(id), &uuid[0])
+	if result != 0 {
+		message := C.strerror(result)
+		return fmt.Errorf("mbr_uid_to_uuid: %s", C.GoString(message))
+	}
+	rv, err := C.acl_set_qualifier(entry.e, unsafe.Pointer(&uuid[0]))
 	if rv < 0 {
 		return errors.Wrapf(err, "acl_set_qualifier(%d)", id)
 	}
