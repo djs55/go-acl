@@ -119,3 +119,8 @@ func (pset *Permset) String() string {
 func GetFileExtended(path string) (*ACL, error) {
 	return nil, errors.New("GetFileExtended only supported on Darwin")
 }
+
+// SetFileExtended returns the extended access ACL associated with the given file path.
+func SetFileExtended(path string, acl *ACL) error {
+	return nil, errors.New("SetFileExtended only supported on Darwin")
+}

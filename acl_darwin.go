@@ -154,3 +154,8 @@ func (pset *Permset) String() string {
 func GetFileExtended(path string) (*ACL, error) {
 	return getFile(path, C.ACL_TYPE_EXTENDED)
 }
+
+// SetFileExtended applies the extended access ACL to a file.
+func (acl *ACL) SetFileExtended(path string) error {
+	return acl.setFile(path, C.ACL_TYPE_EXTENDED)
+}
