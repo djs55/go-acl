@@ -212,9 +212,9 @@ func Parse(s string) (*ACL, error) {
 }
 
 func getFile(path string, tp C.acl_type_t) (*ACL, error) {
-	cacl, _ := C.acl_get_file(C.CString(path), tp)
+	cacl, err := C.acl_get_file(C.CString(path), tp)
 	if cacl == nil {
-		return nil, fmt.Errorf("unable to get ACL from file")
+		return nil, err
 	}
 	return &ACL{cacl}, nil
 }
