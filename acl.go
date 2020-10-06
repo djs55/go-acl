@@ -150,7 +150,7 @@ func New() *ACL {
 func (acl *ACL) FirstEntry() *Entry {
 	var e C.acl_entry_t
 	rv, _ := C.acl_get_entry(acl.a, C.ACL_FIRST_ENTRY, &e)
-	if rv <= 0 {
+	if rv < 0 {
 		// either error obtaining entry or entries at all
 		return nil
 	}
@@ -162,7 +162,7 @@ func (acl *ACL) FirstEntry() *Entry {
 func (acl *ACL) NextEntry() *Entry {
 	var e C.acl_entry_t
 	rv, _ := C.acl_get_entry(acl.a, C.ACL_NEXT_ENTRY, &e)
-	if rv <= 0 {
+	if rv < 0 {
 		// either error obtaining entry or no more entries
 		return nil
 	}
